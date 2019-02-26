@@ -18,7 +18,7 @@ export class HierarchyService {
 
 
   public getHeirarchy(id: number) : Observable<HierachyEntity> {
-    return of(this.generateBoatHeirarchy(5));
+    return of(this.generateBoatHeirarchy(7));
   }
 
   private generateGambler() : Gambler {
