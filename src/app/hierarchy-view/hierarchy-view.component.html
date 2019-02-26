@@ -6,9 +6,22 @@
 <ng-container *ngIf="selectedHierarchy">
   <ol class="breadcrumb">
     <li *ngFor="let identifier of treePath; last as isLast" class="breadcrumb-item">
-      <button (click)="traverse(identifier.id)" class="btn btn-link mdi">
-        <span [class.font-weight-bold]="isLast">{{identifier.name}} <em class="mdi" [ngClass]="determineIcon(identifier.type)"></em></span>
+
+      <button (click)="traverse(identifier.id)" class="btn btn-link px-0">
+        <span [class.font-weight-bold]="isLast">
+          <em class="mdi" [ngClass]="determineIcon(identifier.type)"></em>
+          {{identifier.name}}
+        </span>
       </button>
+      <div *ngIf="identifier.type.hasParent && findPeers(identifier.id).length" ngbDropdown class="d-inline">
+          <button class="btn btn-link px-0" id="peerDropdown" ngbDropdownToggle></button>
+          <div ngbDropdownMenu aria-labelledby="peerDropdown">
+            <button *ngFor="let peer of findPeers(identifier.id)" (click)="selectHierarchy(peer)" class="dropdown-item">
+              {{peer.name}}
+              <em class="mdi" [ngClass]="determineIcon(peer.hierarchyType)"></em>
+            </button>
+          </div>
+        </div>
     </li>
   </ol>
   <div class="container-fluid">

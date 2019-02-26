@@ -41,7 +41,6 @@ export class HierarchyViewComponent implements OnInit {
 
   public determineIcon(type: HeirarchyEnum) : string {
     const id = type.id
-    console.log(type.id)
     if (id=== HierarchyType.BOAT().id) {
       return 'mdi-ferry'
     }
@@ -54,6 +53,13 @@ export class HierarchyViewComponent implements OnInit {
     return 'mdi-account'
   }
   public traverse(id: number) {
+    let hierarchy = this.findOnPath(id);
+    if (hierarchy !== this.selectedHierarchy) {
+      this.hierarchyChange.next(hierarchy);
+    }
+  }
+
+  private findOnPath(id: number) : HierachyEntity {
     let hierarchy = this.selectedHierarchy;
     while (hierarchy.id !== id) {
       hierarchy = hierarchy.parent;
@@ -61,9 +67,12 @@ export class HierarchyViewComponent implements OnInit {
     if (hierarchy == null) {
       throw Error('Cannot Find Link')
     }
-    else if (hierarchy !== this.selectedHierarchy) {
-      this.hierarchyChange.next(hierarchy);
-    }
+    return hierarchy;
+  }
+
+  public findPeers(id: number) : HierachyEntity[] {
+    let hierachy = this.findOnPath(id);
+    return hierachy.parent.children.filter(child => child.id !== id);
   }
 
   public childTooltip(child: HierachyEntity) {
