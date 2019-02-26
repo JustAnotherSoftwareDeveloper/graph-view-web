@@ -1,0 +1,16 @@
+<div *ngIf="child" class="container-12 card ">
+  <div class="row card-body">
+    <div class="col-12 card-title">
+      <h5><em class="mdi" [ngClass]="icon"></em> {{child.name}}<button (click)="selectHierarchy()" class="btn btn-link"><em
+            class="mdi mdi-arrow-expand-all"></em></button></h5>
+    </div>
+    <div class="col-2">
+      <span class="font-weight-bold d-block">Type:</span>
+      <span>{{child.hierarchyType.displayName}}</span>
+    </div>
+    <div class="col-2">
+      <span class="font-weight-bold d-block">Children:</span>
+      <span>{{child.children.length}}</span>
+    </div>
+  </div>
+</div>

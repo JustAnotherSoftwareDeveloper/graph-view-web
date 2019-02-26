@@ -1,0 +1,49 @@
+<div *ngIf="!selectedHierarchy">
+  Loading...
+  <em class="mdi mdi-loading mdi-spin"></em>
+</div>
+
+<ng-container *ngIf="selectedHierarchy">
+  <ol class="breadcrumb">
+    <li *ngFor="let identifier of treePath; last as isLast" class="breadcrumb-item">
+      <button (click)="traverse(identifier.id)" class="btn btn-link mdi">
+        <span [class.font-weight-bold]="isLast">{{identifier.name}} <em class="mdi" [ngClass]="determineIcon(identifier.type)"></em></span>
+      </button>
+    </li>
+  </ol>
+  <div class="container-fluid">
+    <div class="row px-3 pb-1">
+      <div class="col card">
+        <div class="card-body">
+          <h5 class="card-title">Description</h5>
+          <p class="card-text">{{selectedHierarchy.description}}</p>
+        </div>
+
+      </div>
+    </div>
+    <ng-container *ngIf="selectedHierarchy.children.length">
+        <div class="row">
+          <div class="col">
+            <h3>Children</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let child of selectedHierarchy.children" class="col-6 pb-1">
+            <tst-child-view [child]="child" [icon]="determineIcon(child.hierarchyType)" (selected)="selectHierarchy($event)"></tst-child-view>
+          </div>
+        </div>
+      </ng-container>
+    <div class="row">
+      <div class="col">
+        <h3>Gamblers</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let gambler of selectedHierarchy.gamblers" class="col-4 pb-1">
+        <tst-gambler-view [gambler]="gambler"></tst-gambler-view>
+      </div>
+    </div>
+
+
+  </div>
+</ng-container>

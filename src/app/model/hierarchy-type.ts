@@ -1,7 +1,11 @@
+import dcopy from 'deep-copy';
+
 export interface HeirarchyEnum {
   id: number;
   hasParent: boolean;
   hasChildren: boolean;
+
+  displayName: string;
 
 
 }
@@ -9,21 +13,34 @@ export interface HeirarchyEnum {
 export namespace HierarchyType {
 
 
-  export class BOAT implements HeirarchyEnum {
-    public readonly id: 0;
-    public readonly hasParent: false;
-    public readonly hasChildren: true;
+  export function BOAT(): HeirarchyEnum {
+    return dcopy(boat);
   }
 
-  export class LAWYER implements HeirarchyEnum {
-    public readonly id: 1;
-    public readonly hasParent: true;
-    public readonly hasChildren: true
+  export function LAWYER(): HeirarchyEnum {
+    return dcopy(lawyer);
   }
 
-  export class LECTURE implements HeirarchyEnum  {
-    public readonly id: 2;
-    public readonly hasParent: true;
-    public readonly hasChildren: false;
+  export function LECTURE(): HeirarchyEnum {
+    return dcopy(lecture);
+  }
+
+  const boat = {
+    id: 0,
+    hasParent: false,
+    hasChildren: true,
+    displayName: 'Boat'
+  }
+  const lawyer = {
+    id: 1,
+    hasParent: true,
+    hasChildren: true,
+    displayName: 'Lawyer'
+  }
+  const lecture = {
+    id: 2,
+    hasParent: true,
+    hasChildren: false,
+    displayName: 'Lecture'
   }
 }
