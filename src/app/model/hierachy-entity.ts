@@ -4,7 +4,7 @@ import { Gambler } from "./gambler";
 export interface HierachyEntity {
 
   id: number;
-  heirachyType: HeirarchyEnum;
+  hierarchyType: HeirarchyEnum;
 
   parent: HierachyEntity;
 
@@ -15,6 +15,8 @@ export interface HierachyEntity {
   description: string;
 
   gamblers: Gambler[];
+
+  name: string;
 }
 
 
