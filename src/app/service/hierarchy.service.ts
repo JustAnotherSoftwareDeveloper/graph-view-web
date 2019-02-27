@@ -9,6 +9,9 @@ import { Observable, of } from 'rxjs';
 import createIpsum from 'corporate-ipsum';
 import forcem from 'forcem-ipsum';
 import * as metalName from 'metal-name';
+import generateRandomName from 'pirate-name-generator';
+import { generateParagraphs, Mode } from 'samuel-ipsum'
+import jeffsum from 'jeffsum';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +25,9 @@ export class HierarchyService {
   }
 
   private generateGambler() : Gambler {
-    const options = ['e4','e5','e6'];
     const id = faker.random.number(1000);
-    const name = forcem('people',1);
-    const description = forcem(options[faker.random.number(1000) % 3]);
+    const name = generateRandomName();
+    const description = jeffsum(5);
     return {
       id: id,
       name: name,
@@ -78,7 +80,7 @@ export class HierarchyService {
   }
 
   private generateChild(parent: HierachyEntity, numChildren: number) : HierachyEntity {
-      return faker.random.number() % 3 == 0 ? this.generateLecture(parent) : this.generateLawyerHeirarchy(parent, numChildren)
+      return ( numChildren == 0 || faker.random.number() % 3 == 0) ? this.generateLecture(parent) : this.generateLawyerHeirarchy(parent, numChildren)
   }
 
 }

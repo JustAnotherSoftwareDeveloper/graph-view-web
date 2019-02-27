@@ -13,7 +13,7 @@
           {{identifier.name}}
         </span>
       </button>
-      <div *ngIf="identifier.type.hasParent && findPeers(identifier.id).length" ngbDropdown class="d-inline">
+      <div *ngIf="isLast && identifier.type.hasParent && findPeers(identifier.id).length" ngbDropdown class="d-inline">
           <button class="btn btn-link px-0" id="peerDropdown" ngbDropdownToggle></button>
           <div ngbDropdownMenu aria-labelledby="peerDropdown">
             <button *ngFor="let peer of findPeers(identifier.id)" (click)="selectHierarchy(peer)" class="dropdown-item">

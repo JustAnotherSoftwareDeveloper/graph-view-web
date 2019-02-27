@@ -26,9 +26,12 @@
     "deep-copy": "~1.4.2",
     "faker": "~4.1.0",
     "forcem-ipsum": "~1.7.3",
+    "jeffsum": "0.0.1",
     "metal-name": "~1.3.1",
+    "pirate-name-generator": "~1.0.0",
     "plausible-company-name": "~1.0.5",
     "rxjs": "~6.3.3",
+    "samuel-ipsum": "~1.0.10",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
